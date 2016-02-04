@@ -1,8 +1,8 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm1 
    Caption         =   "Макрос генерации листов для печати на чехлах телефонов"
-   ClientHeight    =   6540
-   ClientLeft      =   45
+   ClientHeight    =   7450
+   ClientLeft      =   50
    ClientTop       =   390
    ClientWidth     =   12270
    OleObjectBlob   =   "UserForm1.frx":0000
@@ -16,6 +16,10 @@ Attribute VB_Exposed = False
 
 Private Sub CommandButton1_Click()
     TextBox1.Text = CorelScriptTools.GetFileBox("Excel Files (*.xls)|*.xls", "Select a file", 0, TextBox1.Text)
+End Sub
+
+Private Sub CommandButton9_Click()
+    TextBox7.Text = CorelScriptTools.GetFileBox("Excel Files (*.xls)|*.xls", "Select a file", 0, TextBox1.Text)
 End Sub
 
 Private Sub CommandButton2_Click()
@@ -36,16 +40,20 @@ Private Sub CommandButton5_Click()
     Or TextBox3.Text = "" _
     Or TextBox4.Text = "" _
     Or TextBox5.Text = "" _
+    Or TextBox6.Text = "" _
+    Or TextBox7.Text = "" _
     Then
         MsgBox "Пустое поле"
         Exit Sub
     End If
 
-    myFileName = TextBox1.Text
+    myFileNameText = TextBox1.Text
+    myFileNameImage = TextBox7.Text
     mySaveFolderName = TextBox2.Text
     myExcelFolderName = TextBox3.Text
     myExcelFileName = TextBox4.Text
-    myImageFolderName = TextBox5.Text
+    myMessageImageFolderName = TextBox5.Text
+    myPictureImageFolderName = TextBox6.Text
     myExportWhite = CheckBox1.Value
     myExportThruAI = CheckBox2.Value
     myWhiteAsCyan = CheckBox3.Value
@@ -62,12 +70,18 @@ Private Sub CommandButton7_Click()
     TextBox5.Text = FOLDER_SELECTION(TextBox5.Text, 4, "Make your selection.")
 End Sub
 
+Private Sub CommandButton8_Click()
+    TextBox6.Text = FOLDER_SELECTION(TextBox6.Text, 4, "Make your selection.")
+End Sub
+
 Private Sub UserForm_Initialize()
-    TextBox1.Text = myFileName
+    TextBox1.Text = myFileNameText
+    TextBox7.Text = myFileNameImage
     TextBox2.Text = mySaveFolderName
     TextBox3.Text = myExcelFolderName
     TextBox4.Text = myExcelFileName
-    TextBox5.Text = myImageFolderName
+    TextBox5.Text = myMessageImageFolderName
+    TextBox6.Text = myPictureImageFolderName
     CheckBox1.Value = myExportWhite
     CheckBox2.Value = myExportThruAI
     CheckBox3.Value = myWhiteAsCyan
